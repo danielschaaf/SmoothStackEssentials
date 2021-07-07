@@ -1,0 +1,123 @@
+1.	 Which class would you use to store your birthday in years, months, days, seconds, and nanoseconds?
+		I would use the LocalDateTime Class.
+
+2.	 Given a random date, how would you find the date of the previous Thursday?
+		I would use the Previous method of a TemporalAdjuster
+				LocalDate date = the date
+				System.out.println("the previous thrusday's date was"+ date.with(TemporalAdjuster.previous(DayOfWeek.THURSDAY)));
+
+3.	 What is the difference between a ZoneId and a ZoneOffset?
+		ZoneId and ZoneOffset track the offset from UTC time. ZoneOffset  tracks the absolute offset from UTC Time. 
+		The ZoneId class uses ZoneRules to determine the offset for a particular part of the region and year.
+4.	 How would you convert an Instant to a ZonedDateTime? How would you convert a ZonedDateTime to an Instant?
+    	I would use the ZonedDateTime.instantOf() method to convert and supply at ZoneId
+    	to go the other way i would use the ToInstant() method that is part of the ChronoZonedDateTime interface.
+    	
+    	
+5.	 Write an example that, for a given year, reports the length of each month within that year.
+		import java.time.Month;
+		import java.time.Year;
+		import java.time.YearMonth;
+		import java.time.DateTimeException;
+		
+		import java.io.PrintStream;
+		import java.lang.NumberFormatException;
+		
+		public class DaysInMonth{
+		 	  public static void main(String[] args) {
+        int year = 0;
+
+        if (args.length <= 0) {
+            throw new IllegalArgumentException();
+        }
+
+        try {
+            year = Integer.parseInt(args[0]);
+        } catch (NumberFormatException nexc) {
+            System.out.println(" not a properly formatted number.",
+                args[0]);
+            throw nexc;     // Rethrow the exception.
+        }
+
+        try {
+            Year test = Year.of(year);
+        } catch (DateTimeException exc) {
+            System.out.println("is not a valid year.", year);
+            throw exc;     // Rethrow the exception.
+        }
+
+        System.out.printf("For the year %d:%n", year);
+        for (Month month : Month.values()) {
+            YearMonth yearMonth = YearMonth.of(year, month);
+            System.out.printf("%s: %d days%n", month, yearMonth.lengthOfMonth());
+        }
+    }
+}
+
+
+
+6.	 Write an example that, for a given month of the current year, lists all of the Mondays in that month.
+
+		import java.time.Month;
+		import java.time.Year;
+		import java.time.DayOfWeek;
+		import java.time.LocalDate;
+		import java.time.DateTimeException;
+		
+		import java.time.temporal.TemporalAdjuster;
+		import java.time.temporal.TemporalAdjusters;
+		
+		import java.io.PrintStream;
+		import java.lang.NumberFormatException;
+		
+		public class ListMondays {
+		    public static void main(String[] args) {
+		        Month month = null;
+		
+		        if (args.length < 1) {
+		            System.out.printf("Usage: ListMondays <month>%n");
+		            throw new IllegalArgumentException();
+		        }
+		
+		        try {
+		            month = Month.valueOf(args[0].toUpperCase());
+		        } catch (IllegalArgumentException exc) {
+		            System.out.println(" is not a valid month.", args[0]);
+		            throw exc;      // Rethrow the exception.
+		        }
+		
+		        System.out.println("For the month of "+ month);
+		        LocalDate date = Year.now().atMonth(month).atDay(1).
+		              with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+		        Month monthIndicated = date.getMonth();
+		        while (monthIndicated == month) {
+		            System.out.printf("%s%n", date);
+		            date = date.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+		            monthIndicated = date.getMonth();
+		        }
+		    }
+		}
+
+7.	 Write an example that tests whether a given date occurs on Friday the 13th.
+
+			import java.time.Month;
+			import java.time.Year;
+			import java.time.LocalDate;
+			import java.time.DateTimeException;
+			
+			import java.time.temporal.TemporalQuery;
+			import java.time.temporal.TemporalAccessor;
+			import java.time.temporal.ChronoField;
+			
+			import java.io.PrintStream;
+			import java.lang.Boolean;
+			
+			public class CheckIfFridayThirteen implements TemporalQuery<Boolean> {
+    
+			    
+			    public Boolean queryFrom(TemporalAccessor date) {
+			        
+			        return ((date.get(ChronoField.DAY_OF_MONTH) == 13) &&
+			                (date.get(ChronoField.DAY_OF_WEEK) == 5));
+			    }
+			}
