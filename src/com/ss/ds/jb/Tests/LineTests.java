@@ -1,4 +1,4 @@
-package com.ss.ds.jb.four.Tests;
+package com.ss.ds.jb.Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
