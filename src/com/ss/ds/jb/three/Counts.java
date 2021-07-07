@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 public class Counts {
 	
 	public static void main(String[] args) throws IOException {
-		String fileName ="C:\\Users\\Danie\\git\\AssignmentsForSmoothStack\\resources\\testingCountprogram.txt";
+		String fileName ="C:\\Users\\Danie\\git\\SmoothStackEssentials\\resources\\testingCountprogram.txt";
 		Path pathToFile = Paths.get(fileName);
 		String s = args[0];
 		char character = s.charAt(0);
