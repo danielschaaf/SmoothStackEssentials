@@ -1,0 +1,30 @@
+SELECT A.branchName as 'Branch Name', count(*) as 'Number of Books'
+FROM library.tbl_library_branch A, library.tbl_book_loans O
+WHERE O.branchId = A.branchId
+group by A.branchId;
+
+5.	For each library branch, retrieve the branch name and the total number of books loaned out from that branch.
+BranchID	number of books
+
+Sharpstown		15
+Central			21
+Boyd			21
+Arkansas		16
+Pierstorff		31
+Prentice		20
+Derek			7
+Nelson			17
+Hoard			21
+Dakota			24
+Transport		30
+Hoffman			17
+David			15
+Longview		23
+Thackeray		15
+Stoughton		21
+Tennessee		29
+Knutson			25
+Redwing			17
+Steensland		24
+
+

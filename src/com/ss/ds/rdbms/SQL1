@@ -1,0 +1,6 @@
+SELECT branchName,noOfCopies
+FROM((library.tbl_book Natural Join library.tbl_book_copies)Natural Join Library.tbl_library_branch)
+WHERE branchName='Sharpstown' and title = 'The Lost Tribe';
+
+1.	How many copies of the book titled The Lost Tribe are owned by the library branch whose name is "Sharpstown"?
+there are 0 copies owned by the Sharpstown branch.
