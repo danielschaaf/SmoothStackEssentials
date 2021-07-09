@@ -2,8 +2,8 @@ Select B.title, C.noOfCopies
 from(((library.tbl_author A
 Inner Join library.tbl_book B on A.authorId = B.authID)
 Inner Join library.tbl_book_copies C on C.bookId = B.bookId)
-Inner Join library.tbl_library_branch R on C.branchId = R.branchId)
-where A.authorName = 'Stephen King' and R.branchName = 'Central'
+Inner Join library.tbl_library_branch branch on C.branchId = branch.branchId)
+where A.authorName = 'Stephen King' and branch.branchName = 'Central'
 
 
 7.For each book authored (or co-authored) by "Stephen King", retrieve the title and the number of copies owned by the library branch whose name is "Central"

@@ -1,6 +1,8 @@
-SELECT branchName,noOfCopies
-FROM((library.tbl_book Natural Join library.tbl_book_copies)Natural Join Library.tbl_library_branch)
-WHERE title = 'The Lost Tribe';
+SELECT tbl_book_copies.noOfCopies,tbl_library_branch.branchName
+FROM tbl_book
+Inner Join tbl_book_copies on tbl_book_copies.bookId = tbl_book.bookId
+Inner Join tbl_library_branch on tbl_library_branch.branchId = tbl_book_copies.branchId
+WHERE Title='The Lost Tribe';
 
 
 2.	How many copies of the book titled The Lost Tribe are owned by each library branch?

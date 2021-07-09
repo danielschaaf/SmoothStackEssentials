@@ -1,6 +1,12 @@
-SELECT title,name,address
-FROM (((library.tbl_library_branch natural join library.tbl_book_loans) Natural jtbl_book_loansoin library.tbl_borrower)natural join library.tbl_book)
-WHERE branchName = 'Sharpstown' and date(dueDate)= '2021-07-07';
-
+SELECT tbl_book.title,tbl_borrower.name,tbl_borrower.address
+FROM tbl_book_loans
+Inner Join tbl_borrower on tbl_borrower.cardNo = tbl_book_loans.cardNo
+Inner Join tbl_book on tbl_book.bookId = tbl_book_loans.bookId
+Inner join tbl_library_branch on tbl_library_branch.branchId = tbl_book_loans.branchId
+WHERE branchName = 'Sharpstown' and date(dueDate)= '2018-02-23 ';
 4.	For each book that is loaned out from the "Sharpstown" branch and whose DueDate is today, retrieve the book title, the borrower's name, and the borrower's address.
-there is none for todays date as the date this database was built was back in 2018. 
+there is none for todays date as the date this database was built in 2018 so i chose a date and retrieved this.
+
+
+ title					name						address
+Because I Said So	Candice Wilsher				8770 Dorton Way
